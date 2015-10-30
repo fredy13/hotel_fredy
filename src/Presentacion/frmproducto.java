@@ -5,8 +5,9 @@
  */
 package Presentacion;
 
-import Datos.vhabitacion;
+import Datos.vproducto;
 import Logica.fhabitacion;
+import Logica.fproducto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,21 +15,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author usuario
  */
-public class fmrhabitacion extends javax.swing.JFrame {
+public class frmproducto extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form fmrhabitacion
+     * Creates new form frmproducto
      */
-    public fmrhabitacion() {
+    public frmproducto() {
         initComponents();
         mostrar("");
         inhabilitar();
         
-        
-        
-        
     }
-    private String accion = "guardar";
+  private String accion = "guardar";
 
     void ocultar_columnas() {
         tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -37,42 +35,39 @@ public class fmrhabitacion extends javax.swing.JFrame {
     }
 
     void inhabilitar() {
-        txtidhabitacion.setVisible(false);
-        cbopiso.setEnabled(false);
-        txtnumero.setEnabled(false);
+        txtidproducto.setVisible(false);
+        
+        txtnombre.setEnabled(false);
         txtdescripcion.setEnabled(false);
-        txtcaracteristicas.setEnabled(false);
-        txtpreciodiario.setEnabled(false);
-        cboestado.setEnabled(false);
-        cbotipohabitacion.setEditable(false);
+        
+        txtprecio_venta.setEnabled(false);
+        cbounidad_medida.setEditable(false);
 
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
-        txtidhabitacion.setText("");
-        txtpreciodiario.setText("");
-        txtcaracteristicas.setText("");
+        txtidproducto.setText("");
+        txtprecio_venta.setText("");
+        txtnombre.setText("");
         txtdescripcion.setText("");
 
     }
 
     void habilitar() {
-        txtidhabitacion.setVisible(false);
-
-        cbopiso.setEnabled(true);
-        txtnumero.setEnabled(true);
+          txtidproducto.setVisible(false);
+        
+        txtnombre.setEnabled(true);
         txtdescripcion.setEnabled(true);
-        txtcaracteristicas.setEnabled(true);
-        txtpreciodiario.setEnabled(true);
-        cboestado.setEnabled(true);
-        cbotipohabitacion.setEditable(true);
+        
+        txtprecio_venta.setEnabled(true);
+        cbounidad_medida.setEditable(true);
 
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
-        txtidhabitacion.setText("");
-        txtpreciodiario.setText("");
-        txtcaracteristicas.setText("");
+        txtidproducto.setText("");
+        txtprecio_venta.setText("");
+        txtnombre.setText("");
         txtdescripcion.setText("");
 
     }
@@ -80,7 +75,7 @@ public class fmrhabitacion extends javax.swing.JFrame {
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
-            fhabitacion func = new fhabitacion();
+            fproducto func = new fproducto();
             modelo = func.mostrar(buscar);
 
             tablalistado.setModel(modelo);
@@ -92,7 +87,14 @@ public class fmrhabitacion extends javax.swing.JFrame {
         }
 
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,28 +104,26 @@ public class fmrhabitacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        txtidhabitacion = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtnumero = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         cbopiso = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtcaracteristicas = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        txtidproducto = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtnombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtdescripcion = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtpreciodiario = new javax.swing.JTextField();
+        txtprecio_venta = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        cboestado = new javax.swing.JComboBox();
-        jLabel8 = new javax.swing.JLabel();
-        cbotipohabitacion = new javax.swing.JComboBox();
+        cbounidad_medida = new javax.swing.JComboBox();
         btnnuevo = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablalistado = new javax.swing.JTable();
@@ -133,24 +133,6 @@ public class fmrhabitacion extends javax.swing.JFrame {
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("habitacion");
-
-        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de habitaciones"));
-
-        jLabel2.setText("numero");
-
-        txtnumero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnumeroActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("piso");
-
         cbopiso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
         cbopiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,41 +140,45 @@ public class fmrhabitacion extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("descripcion");
+        jLabel5.setText("caracteristicas");
 
         txtcaracteristicas.setColumns(20);
         txtcaracteristicas.setRows(5);
         jScrollPane1.setViewportView(txtcaracteristicas);
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de productos"));
+
+        jLabel2.setText("nombre");
+
+        txtnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnombreActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("descripcion");
+
         txtdescripcion.setColumns(20);
         txtdescripcion.setRows(5);
         jScrollPane2.setViewportView(txtdescripcion);
 
-        jLabel5.setText("caracteristicas");
+        jLabel6.setText("precio venta");
 
-        jLabel6.setText("precio diario:");
-
-        txtpreciodiario.addActionListener(new java.awt.event.ActionListener() {
+        txtprecio_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpreciodiarioActionPerformed(evt);
+                txtprecio_ventaActionPerformed(evt);
             }
         });
 
-        jLabel7.setText("estado");
+        jLabel7.setText(" unidad medida");
 
-        cboestado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "disponible", "ocupado", "mantenimiento" }));
-        cboestado.addActionListener(new java.awt.event.ActionListener() {
+        cbounidad_medida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "KG", "UND", "LT", "MIN", "GLB", " " }));
+        cbounidad_medida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboestadoActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("tipo de habitacion");
-
-        cbotipohabitacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "induvidual", "matrimonial", "familiar", "presidencial" }));
-        cbotipohabitacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbotipohabitacionActionPerformed(evt);
+                cbounidad_medidaActionPerformed(evt);
             }
         });
 
@@ -214,6 +200,11 @@ public class fmrhabitacion extends javax.swing.JFrame {
 
         btncancelar.setBackground(new java.awt.Color(204, 255, 255));
         btncancelar.setText("cancelar");
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -229,94 +220,78 @@ public class fmrhabitacion extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtidhabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(85, 85, 85))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(60, 60, 60)
-                                .addComponent(cboestado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(43, 43, 43)
-                                .addComponent(txtpreciodiario))
+                                .addComponent(txtprecio_venta))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbopiso, 0, 140, Short.MAX_VALUE)
-                                    .addComponent(txtnumero)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbotipohabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnnuevo)
-                            .addComponent(jLabel8))
-                        .addGap(48, 48, 48)
-                        .addComponent(btnguardar)
-                        .addGap(66, 66, 66)
-                        .addComponent(btncancelar)
-                        .addGap(0, 41, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(btnnuevo)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnguardar)
+                                .addGap(38, 38, 38)
+                                .addComponent(btncancelar)
+                                .addGap(0, 28, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(48, 48, 48)
+                                .addComponent(cbounidad_medida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(txtidhabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbopiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addComponent(jLabel4)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtpreciodiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(cboestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cbounidad_medida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(cbotipohabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel6)
+                    .addComponent(txtprecio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnnuevo)
                     .addComponent(btnguardar)
                     .addComponent(btncancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Producto");
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("lista de habitaciones"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("lista de productos"));
 
         tablalistado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -382,7 +357,7 @@ public class fmrhabitacion extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbltotalregistros)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +372,7 @@ public class fmrhabitacion extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbltotalregistros)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -411,9 +386,9 @@ public class fmrhabitacion extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -431,152 +406,138 @@ public class fmrhabitacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboestadoActionPerformed
-        // TODO add your handling code here:
-        cboestado.transferFocus();
-    }//GEN-LAST:event_cboestadoActionPerformed
-
-    private void cbotipohabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbotipohabitacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbotipohabitacionActionPerformed
-
-    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
-        // TODO add your handling code here:
-        habilitar();
-        btnguardar.setText("guardar");
-        accion = "guardar";
-
-    }//GEN-LAST:event_btnnuevoActionPerformed
-
-    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        // TODO add your handling code here:
-        if (txtnumero.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Numero de Habitacion");
-            txtnumero.requestFocus();
-            return;
-        }
-        if (txtdescripcion.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una descripcion para la Habitacion");
-            txtdescripcion.requestFocus();
-            return;
-        }
-        if (txtpreciodiario.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un precio diario para la Habitacion");
-            txtpreciodiario.requestFocus();
-            return;
-        }
-        if (txtcaracteristicas.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una caracteristica para la Habitacion");
-            txtcaracteristicas.requestFocus();
-            return;
-        }
-        vhabitacion dts = new vhabitacion();
-        fhabitacion func = new fhabitacion();
-
-        dts.setNuemro(txtnumero.getText());
-       
-        int seleccionado = cbopiso.getSelectedIndex();
-        dts.setPiso((String) cbopiso.getItemAt(seleccionado));
-
-       dts.setDescripcion(txtdescripcion.getText());
-       dts.setCaracteristicas(txtcaracteristicas.getText());
-       
-       dts.setPrecio_diario(Double.parseDouble(txtpreciodiario.getText()));
-       
-        seleccionado = cboestado.getSelectedIndex();
-        dts.setEstado((String) cboestado.getItemAt(seleccionado));
-
-       seleccionado = cbotipohabitacion.getSelectedIndex();
-        dts.setTipo_habitacion((String) cbotipohabitacion.getItemAt(seleccionado));
- 
-        if (accion.equals("guardar")) {
-            if (func.insertar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "la habitacion fue rejistrada satisfatoriamente");
-                mostrar("");
-                inhabilitar();
-                
-            }
-            
-        }
-        else if (accion.equals("ediras")){
-            dts.setIdhabitacion(Integer.parseInt(txtidhabitacion.getText()));
-            
-            if (func.editar(dts)) {
-                 JOptionPane.showMessageDialog(rootPane, "la habitacion fue editada satisfatoriamente");
-                mostrar("");
-                inhabilitar();
-                
-            }
-            
-        }
-        
-        
-    }//GEN-LAST:event_btnguardarActionPerformed
-
-    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        // TODO add your handling code here:
-        if (!txtidhabitacion.getText().equals("")) {
-         int confirmacion=JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar la habitacion"," confirmar",2);
-            if (confirmacion==0) {
-                fhabitacion func =new fhabitacion ();
-                vhabitacion dts=new vhabitacion();
-                
-                dts.setIdhabitacion(Integer.parseInt(txtidhabitacion.getText()));
-                func.eliminar(dts);
-                mostrar("");
-                inhabilitar();
-            }
-        }
-        
-        
-    }//GEN-LAST:event_btneliminarActionPerformed
-
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        // TODO add your handling code here:
-        mostrar(txtbuscar.getText());
-    }//GEN-LAST:event_btnbuscarActionPerformed
-
-    private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
-        // TODO add your handling code here:
-        txtnumero.transferFocus();
-    }//GEN-LAST:event_txtnumeroActionPerformed
-
-    private void cbopisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbopisoActionPerformed
-        // TODO add your handling code here:
-        cbopiso.transferFocus();
-    }//GEN-LAST:event_cbopisoActionPerformed
-
-    private void txtpreciodiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpreciodiarioActionPerformed
-        // TODO add your handling code here:
-        txtpreciodiario.transferFocus();
-    }//GEN-LAST:event_txtpreciodiarioActionPerformed
-
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
         // TODO add your handling code here:
         btnguardar.setText("Editar");
         habilitar();
         btneliminar.setEnabled(true);
         accion="editar";
-        
+
         int fila=tablalistado.rowAtPoint(evt.getPoint());
-        
-        txtidhabitacion.setText(tablalistado.getValueAt(fila, 0).toString());
-        txtnumero.setText(tablalistado.getValueAt(fila, 1).toString());
+
+        txtidproducto.setText(tablalistado.getValueAt(fila, 0).toString());
+        txtnombre.setText(tablalistado.getValueAt(fila, 1).toString());
+
       
-        cbopiso.setSelectedItem(tablalistado.getValueAt(fila, 2).toString());
-        txtdescripcion.setText(tablalistado.getValueAt(fila, 3).toString());
-        txtcaracteristicas.setText(tablalistado.getValueAt(fila, 4).toString());
-        txtpreciodiario.setText(tablalistado.getValueAt(fila, 5).toString());
-        
-        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 6).toString());
-        cbotipohabitacion.setSelectedItem(tablalistado.getValueAt(fila, 7).toString());
-        
+        txtdescripcion.setText(tablalistado.getValueAt(fila, 2).toString());
+        cbounidad_medida.setSelectedItem(tablalistado.getValueAt(fila, 3).toString());
+        txtprecio_venta.setText(tablalistado.getValueAt(fila, 4).toString());
+
+       
     }//GEN-LAST:event_tablalistadoMouseClicked
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        // TODO add your handling code here:
+        mostrar(txtbuscar.getText());
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        // TODO add your handling code here:
+        if (!txtidproducto.getText().equals("")) {
+            int confirmacion=JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar el producto"," confirmar",2);
+            if (confirmacion==0) {
+                fproducto func =new fproducto();
+                vproducto dts=new vproducto();
+
+                dts.setIdproducto(Integer.parseInt(txtidproducto.getText()));
+                func.eliminar(dts);
+                mostrar("");
+                inhabilitar();
+            }
+        }
+
+    }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        // TODO add your handling code here:
+        if (txtnombre.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un nombre para el producto");
+            txtnombre.requestFocus();
+            return;
+        }
+        if (txtdescripcion.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una descripcion para el producto");
+            txtdescripcion.requestFocus();
+            return;
+        }
+        if (txtprecio_venta.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un precio diario para la venta del producto");
+            txtprecio_venta.requestFocus();
+            return;
+        }
+        
+        vproducto dts = new vproducto();
+        fproducto func = new fproducto();
+
+        dts.setNombre(txtnombre.getText());
+
+        dts.setDescripcion(txtdescripcion.getText());
+        
+     
+        dts.setPrecio_venta(Double.parseDouble(txtprecio_venta.getText()));
+
+        int seleccionado = cbounidad_medida.getSelectedIndex();
+        dts.setUnidad_medida((String) cbounidad_medida.getItemAt(seleccionado));
+
+        
+        if (accion.equals("guardar")) {
+            if (func.insertar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "el producto fue registrada satisfatoriamente");
+                mostrar("");
+                inhabilitar();
+
+            }
+
+        }
+        else if (accion.equals("ediras")){
+            dts.setIdproducto(Integer.parseInt(txtidproducto.getText()));
+
+            if (func.editar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "el producto fue editado satisfatoriamente");
+                mostrar("");
+                inhabilitar();
+
+            }
+
+        }
+    }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
+        // TODO add your handling code here:
+        habilitar();
+        btnguardar.setText("guardar");
+        accion = "guardar";
+    }//GEN-LAST:event_btnnuevoActionPerformed
+
+    private void cbounidad_medidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbounidad_medidaActionPerformed
+        // TODO add your handling code here:
+        cbounidad_medida.transferFocus();
+    }//GEN-LAST:event_cbounidad_medidaActionPerformed
+
+    private void txtprecio_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecio_ventaActionPerformed
+        // TODO add your handling code here:
+        txtprecio_venta.transferFocus();
+    }//GEN-LAST:event_txtprecio_ventaActionPerformed
+
+    private void cbopisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbopisoActionPerformed
+        // TODO add your handling code here:
+        cbopiso.transferFocus();
+    }//GEN-LAST:event_cbopisoActionPerformed
+
+    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
+        // TODO add your handling code here:
+        txtnombre.transferFocus();
+    }//GEN-LAST:event_txtnombreActionPerformed
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btncancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -595,20 +556,20 @@ public class fmrhabitacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fmrhabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmproducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fmrhabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmproducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fmrhabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmproducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fmrhabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmproducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fmrhabitacion().setVisible(true);
+                new frmproducto().setVisible(true);
             }
         });
     }
@@ -620,9 +581,8 @@ public class fmrhabitacion extends javax.swing.JFrame {
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnnuevo;
     private javax.swing.JButton btnsalir;
-    private javax.swing.JComboBox cboestado;
     private javax.swing.JComboBox cbopiso;
-    private javax.swing.JComboBox cbotipohabitacion;
+    private javax.swing.JComboBox cbounidad_medida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -630,7 +590,6 @@ public class fmrhabitacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -641,8 +600,8 @@ public class fmrhabitacion extends javax.swing.JFrame {
     private javax.swing.JLabel txtbuscar;
     private javax.swing.JTextArea txtcaracteristicas;
     private javax.swing.JTextArea txtdescripcion;
-    private javax.swing.JTextField txtidhabitacion;
-    private javax.swing.JTextField txtnumero;
-    private javax.swing.JTextField txtpreciodiario;
+    private javax.swing.JTextField txtidproducto;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtprecio_venta;
     // End of variables declaration//GEN-END:variables
 }

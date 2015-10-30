@@ -16,6 +16,7 @@ public class vhabitacion {
   private String descripcion;
   private String caracteristicas;
   private Double precio_diario;
+  private String estado;
   private String tipo_habitacion;
 
     public vhabitacion(int idhabitacion, String nuemro, String piso, String descripcion, String caracteristicas, Double precio_diario, String tipo_habitacion) {
@@ -25,6 +26,7 @@ public class vhabitacion {
         this.descripcion = descripcion;
         this.caracteristicas = caracteristicas;
         this.precio_diario = precio_diario;
+        this.estado=estado;
         this.tipo_habitacion = tipo_habitacion;
     }
 
@@ -78,6 +80,15 @@ public class vhabitacion {
     public void setPrecio_diario(Double precio_diario) {
         this.precio_diario = precio_diario;
     }
+   
+    public String getEstado() {
+        return tipo_habitacion;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
 
     public String getTipo_habitacion() {
         return tipo_habitacion;
