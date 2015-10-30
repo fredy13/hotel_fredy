@@ -38,8 +38,8 @@ public class fcliente {
 
         sSQL = "select p.idpersona,p.nombre,p.apaterno,p.amaterno,p.tipo_documento,p.num_documento,"
                 + "p.direccion,p.telefono,p.email,c.codigo_clientefrom perosona p inner join cliente c "
-                + "on p.idpersona=c.idpersona where num_documento like*&"
-                + buscar + "&*order by idpersona desc";
+                + "on p.idpersona=c.idpersona where num_documento like*%"
+                + buscar + "%*order by idpersona desc";
 
         try {
             Statement st = cn.createStatement();

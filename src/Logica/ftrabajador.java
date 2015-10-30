@@ -39,8 +39,8 @@ public class ftrabajador {
 
         sSQL = "select p.idpersona,p.nombre,p.apaterno,p.amaterno,p.tipo_documento,p.num_documento,"
                 + "p.direccion,p.telefono,p.email,t.sueldo,t.acceso,t.login,t.password,t.estado from perosona p inner join trabajador t "
-                + "on p.idpersona=t.idpersona where num_documento like'&"
-                + buscar + "&'order by idpersona desc";
+                + "on p.idpersona=t.idpersona where num_documento like'%"
+                + buscar + "%'order by idpersona desc";
 
         try {
             Statement st = cn.createStatement();

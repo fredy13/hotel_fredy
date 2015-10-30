@@ -26,28 +26,28 @@ public class fhabitacion {
     public DefaultTableModel mostrar(String buscar){
             DefaultTableModel modelo;
             
-            String [] titulos = {"ID","Numero","piso","Descricion","CaracteristicaS","Precio","Estado","Tipo habitacion"};
+            String [] titulos = {"ID","Numero","piso","Descripcion","CaracteristicaS","Precio","Estado","Tipo habitacion"};
             
             String [] registro = new String [8];
           
             totalregistros=0;
             modelo = new DefaultTableModel(null,titulos);
             
-            sSQL="select*from habitacion where piso like'&"+buscar + "&'order by idhabitacion";
+            sSQL="select * from habitacion where piso like'%"+buscar + "%'order by idhabitacion";
             
              try {
                  Statement st = cn.createStatement();
                  ResultSet rs=st.executeQuery(sSQL);
                  
                  while(rs.next()){
-                 registro [0]=rs.getNString("idhabitacion");
-                 registro [1]=rs.getNString("numero");
-                 registro [2]=rs.getNString("piso");
-                 registro [3]=rs.getNString("descripcion");
-                 registro [4]=rs.getNString("caracteristicas");
-                 registro [5]=rs.getNString("precio_diario");
-                 registro [6]=rs.getNString("estado");
-                 registro [7]=rs.getNString("tipo_habitacion");
+                 registro [0]=rs.getString("idhabitacion");
+                 registro [1]=rs.getString("numero");
+                 registro [2]=rs.getString("piso");
+                 registro [3]=rs.getString("descripcion");
+                 registro [4]=rs.getString("caracteristicas");
+                 registro [5]=rs.getString("precio_diario");
+                 registro [6]=rs.getString("estado");
+                 registro [7]=rs.getString("tipo_habitacion");
                  
                  totalregistros=totalregistros+1;
                  modelo.addRow(registro);
@@ -67,14 +67,14 @@ public class fhabitacion {
     public DefaultTableModel mostrarvista(String buscar){
             DefaultTableModel modelo;
             
-            String [] titulos = {"ID","Numero","piso","Descricion","CaracteristicaS","Precio","Estado","Tipo habitacion"};
+            String [] titulos = {"ID","Numero","piso","Descripcion","CaracteristicaS","Precio","Estado","Tipo habitacion"};
             
             String [] registro = new String [8];
           
             totalregistros=0;
             modelo = new DefaultTableModel(null,titulos);
             
-            sSQL="select*from habitacion where piso like'&"+buscar + "&'and estado='Disponible' order by idhabitacion";
+            sSQL="select*from habitacion where piso like'%"+buscar + "%'and estado='Disponible' order by idhabitacion";
             
              try {
                  Statement st = cn.createStatement();
@@ -171,7 +171,7 @@ public class fhabitacion {
    }      
    
    public boolean eliminar (vhabitacion dts){
-       sSQL="delete from habitacion where idhabitacion=";
+       sSQL="delete from habitacion where idhabitacion=?";
        
        try {
          PreparedStatement pst=cn.prepareStatement(sSQL);
