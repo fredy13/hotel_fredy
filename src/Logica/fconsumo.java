@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Datos.vconsumo;
 import Datos.vhabitacion;
 import Datos.vproducto;
 import java.sql.Connection;
@@ -18,38 +19,48 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author usuario
  */
-public class fproducto {
+public class fconsumo {
    
     private conexion mysql=new conexion();
     private Connection cn=mysql.conectar();
     private String sSQL="";
     public Integer totalregistros;
+    public Double totalconsumo;
+    
     
     public DefaultTableModel mostrar(String buscar){
             DefaultTableModel modelo;
             
-            String [] titulos = {"ID","producto","descrpicion","unidad medida","precio venta"};
+            String [] titulos = {"ID","idreserva","idproducto","producto","cantidad","Precio Venta","estado"};
             
-            String [] registro = new String [5];
+            String [] registro = new String [7];
           
             totalregistros=0;
+            totalconsumo=0.0;
             modelo = new DefaultTableModel(null,titulos);
             
-            sSQL="select*from producto where nombre like'%"+buscar + "%'order by idproducto desc";
+            sSQL="select c.idconsumo,c.idreserva,c.idproducto,p.nombre,c.cantidad,c.precio_venta"
+                    + ",c.estado from consumo c inner join producto p on c.idproducto=p.idproducto"
+                    + " where c.idreserva = "+ buscar + " order by c.idconsumo desc";
             
              try {
                  Statement st = cn.createStatement();
                  ResultSet rs=st.executeQuery(sSQL);
                  
                  while(rs.next()){
-                 registro [0]=rs.getNString("idproducto");
-                 registro [1]=rs.getNString("nombre");
-                 registro [2]=rs.getNString("descripcion");
-                 registro [3]=rs.getNString("unidad medida6");
-                 registro [4]=rs.getNString("precio_venta");
+                 registro [0]=rs.getNString("idconsumo");
+                 registro [1]=rs.getNString("idreserva");
+                 registro [2]=rs.getNString("idproducto");
+                 registro [3]=rs.getNString("nombre");
+                 registro [4]=rs.getNString("cantidad");
+                 registro [5]=rs.getNString("precio_venta");
+                 registro [6]=rs.getNString("estado");
                 
                  
                  totalregistros=totalregistros+1;
+                 totalconsumo=totalconsumo+(rs.getDouble("cantidad")* rs.getDouble("precio_venta"));
+                 
+                 
                  modelo.addRow(registro);
           
                  }
@@ -64,16 +75,16 @@ public class fproducto {
         
     }
             
-   public boolean insertar (vproducto dts){
-       sSQL="insert into producto(nombre,descripcion,unidad_medida,precio_venta)"+
-      "values(?,?,?,?)";        
+   public boolean insertar (vconsumo dts){
+       sSQL="insert into consumo(idreserva,idproducto,cantidad,precio_venta,estado)"+
+      "values(?,?,?,?,?)";        
        try {
            PreparedStatement pst=cn.prepareStatement(sSQL);
-           pst.setString(1, dts.getNombre());
-           pst.setString(2, dts.getDescripcion());
-           pst.setString(3, dts.getUnidad_medida());
+           pst.setInt(1, dts.getIdreserva());
+           pst.setInt(2, dts.getIdproducto());
+           pst.setDouble(3, dts.getCantidad());
            pst.setDouble(4, dts.getPrecio_venta()); 
-            
+           pst.setString(5, dts.getEstado());
            
            int n=pst.executeUpdate();
              
@@ -92,17 +103,18 @@ public class fproducto {
        }
    }
    
-   public boolean editar (vproducto dts){
-       sSQL="update producto set nombre=?,descripcion=?,unidad_medida=?,precio_venta=?"+
-               "where idproducto=?";
+   public boolean editar (vconsumo dts){
+       sSQL="update consumo set idreserva=?,idproducto=?,cantidad=?,precio_venta=?,estado=?"+
+               "where idconsumo?";
        try {
            PreparedStatement pst=cn.prepareStatement(sSQL);
-           pst.setString(1, dts.getNombre());
-           pst.setString(2, dts.getDescripcion());
-           pst.setString(3, dts.getUnidad_medida()); 
+           pst.setInt(1, dts.getIdreserva());
+           pst.setInt(2, dts.getIdproducto());
+           pst.setDouble(3, dts.getCantidad());
            pst.setDouble(4, dts.getPrecio_venta()); 
-          
-           pst.setInt(5, dts.getIdproducto()); 
+           pst.setString(5, dts.getEstado());
+           
+           pst.setInt(6, dts.getIdconsumo()); 
            
            int n=pst.executeUpdate();
              
@@ -121,13 +133,13 @@ public class fproducto {
        }
    }      
    
-   public boolean eliminar (vproducto dts){
-       sSQL="delete from producto where idproducto=?=";
+   public boolean eliminar (vconsumo dts){
+       sSQL="delete from consumo where idconsumo=?=";
        
        try {
          PreparedStatement pst=cn.prepareStatement(sSQL);
           
-           pst.setInt(1, dts.getIdproducto());
+           pst.setInt(1, dts.getIdconsumo());
            
            int n=pst.executeUpdate();
              
