@@ -385,11 +385,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtbuscar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnbuscar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                   <Component id="btneliminar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="btnsalir" min="-2" max="-2" attributes="0"/>
@@ -414,8 +410,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btneliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnsalir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -455,22 +449,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="txtbuscar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="buscar"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnbuscar">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="buscar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbuscarActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="btneliminar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

@@ -57,6 +57,12 @@ public class frmusuariologin extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
+
         btningresar.setBackground(new java.awt.Color(204, 255, 204));
         btningresar.setText("Ingresar");
         btningresar.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +198,10 @@ public class frmusuariologin extends javax.swing.JFrame {
         }
              
     }//GEN-LAST:event_btningresarActionPerformed
+
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
 
     /**
      * @param args the command line arguments

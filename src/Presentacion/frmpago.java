@@ -5,8 +5,16 @@
  */
 package Presentacion;
 
+import Datos.vhabitacion;
+import Datos.vpago;
+import Datos.vreserva;
 import Logica.fconsumo;
+import Logica.fhabitacion;
+import Logica.fpago;
 import Logica.fproducto;
+import Logica.freserva;
+import java.sql.Date;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author usuario
  */
-public class frmpago extends javax.swing.JFrame {
+public class frmpago extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmpago
@@ -83,50 +91,80 @@ public class frmpago extends javax.swing.JFrame {
         txtidpago.setVisible(false);
         
         txtidreserva.setEnabled(false);
-        txtdescripcion.setEnabled(false);
+        txtcliente.setEnabled(false);
         
+             
         txtnum_comprobante.setEnabled(false);
         cbotipo_comprobante.setEditable(false);
-
+        txtigv.setEnabled(false);
+        txttotal_pago.setEnabled(false);
+        txttotalreserva.setEnabled(false);
+        dcfecha_emision.setEnabled(false);
+        dcfecha_pago.setEnabled(false);
+        
+        txtidhabitacion.setVisible(false);
+        txthabitacion.setEnabled(false);
+        
+        
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
         txtidpago.setText("");
         txtnum_comprobante.setText("");
-        txtidreserva.setText("");
-        txtdescripcion.setText("");
+        txtigv.setText("");
+        txttotal_pago.setText("");
 
     }
 
     void habilitar() {
-          txtidpago.setVisible(false);
+            txtidpago.setVisible(true);
         
         txtidreserva.setEnabled(true);
-        txtdescripcion.setEnabled(true);
+        txtcliente.setEnabled(true);
         
+             
         txtnum_comprobante.setEnabled(true);
         cbotipo_comprobante.setEditable(true);
-
+        txtigv.setEnabled(true);
+        txttotal_pago.setEnabled(true);
+        txttotalreserva.setEnabled(true);
+        dcfecha_emision.setEnabled(true);
+        dcfecha_pago.setEnabled(true);
+        
+        txtidhabitacion.setVisible(true);
+        txthabitacion.setEnabled(true);
+        
+        
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
         txtidpago.setText("");
         txtnum_comprobante.setText("");
-        txtidreserva.setText("");
-        txtdescripcion.setText("");
+        txtigv.setText("");
+        //txttotal_pago.setText("");
 
     }
 
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
-            fproducto func = new fproducto();
+            fpago func = new fpago();
             modelo = func.mostrar(buscar);
 
             tablalistado.setModel(modelo);
             ocultar_columnas();
-            lbltotalregistros.setText("Total Registros " + Integer.toString(func.totalregistros));
+            lbltotalregistros.setText("Total Pagos " + Integer.toString(func.totalregistros));
 
+            //Mostrarlos datos de los consumos
+            fconsumo func2 =new fconsumo();
+            modelo =func2.mostrar(buscar);
+            tablalistadoconsumo.setModel(modelo);
+            ocultar_columnasconsumo();
+            
+            lbltotalregistroconsumo.setText("Total consumos"+func2.totalregistros);
+            lbltotalconsumo.setText("Consumo Total:$."+func2.totalconsumo);
+            
+            
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
@@ -172,8 +210,6 @@ public class frmpago extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablalistado = new javax.swing.JTable();
-        txtbuscar = new javax.swing.JLabel();
-        btnbuscar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
@@ -421,16 +457,6 @@ public class frmpago extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablalistado);
 
-        txtbuscar.setText("buscar");
-
-        btnbuscar.setBackground(new java.awt.Color(204, 255, 255));
-        btnbuscar.setText("buscar");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
-            }
-        });
-
         btneliminar.setBackground(new java.awt.Color(204, 255, 255));
         btneliminar.setText("eliminar");
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -456,11 +482,7 @@ public class frmpago extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtbuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnbuscar)
-                .addGap(29, 29, 29)
+                .addGap(140, 140, 140)
                 .addComponent(btneliminar)
                 .addGap(33, 33, 33)
                 .addComponent(btnsalir)
@@ -480,8 +502,6 @@ public class frmpago extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscar)
-                    .addComponent(btnbuscar)
                     .addComponent(btneliminar)
                     .addComponent(btnsalir))
                 .addGap(30, 30, 30)
@@ -618,49 +638,84 @@ public class frmpago extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        if (txtidreserva.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un nombre para el producto");
-            txtidreserva.requestFocus();
+        if (txtigv.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar el igv del Comprobante de pago a generar");
+            txtigv.requestFocus();
             return;
         }
-        if (txtdescripcion.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una descripcion para el producto");
-            txtdescripcion.requestFocus();
+        if (txttotal_pago.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar el total de pagos del comprobante");
+            txttotal_pago.requestFocus();
             return;
         }
         if (txtnum_comprobante.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un precio diario para la venta del producto");
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Numero de Comprobante del Pago");
             txtnum_comprobante.requestFocus();
             return;
         }
 
-        vproducto dts = new vproducto();
-        fproducto func = new fproducto();
+        vpago dts = new vpago();
+        fpago func = new fpago();
 
-        dts.setNombre(txtidreserva.getText());
+        dts.setIdreserva(Integer.parseInt(txtidreserva.getText()));
 
-        dts.setDescripcion(txtdescripcion.getText());
-
-        dts.setPrecio_venta(Double.parseDouble(txtnum_comprobante.getText()));
-
+        
         int seleccionado = cbotipo_comprobante.getSelectedIndex();
-        dts.setUnidad_medida((String) cbotipo_comprobante.getItemAt(seleccionado));
-
+        dts.setTipo_comprobante((String) cbotipo_comprobante.getItemAt(seleccionado));
+        
+        dts.setNum_comprobante(txtnum_comprobante.getText());
+        dts.setIgv(Double.parseDouble(txtigv.getText()));
+        dts.setTotal_pago(Double.parseDouble(txttotal_pago.getText()));
+        
+        Calendar cal;
+        int d,m,a;
+        cal=dcfecha_pago.getCalendar();
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        m=cal.get(Calendar.MONTH);
+        a=cal.get(Calendar.YEAR)-1900;
+        
+        dts.setFecha_pago(new Date(a,m,d));
+        
+        cal=dcfecha_emision.getCalendar();
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        m=cal.get(Calendar.MONTH);
+        a=cal.get(Calendar.YEAR)-1900;
+        
+        dts.setFecha_emision(new Date(a,m,d));
+        
+        
         if (accion.equals("guardar")) {
             if (func.insertar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "el producto fue registrada satisfatoriamente");
-                mostrar("");
+                JOptionPane.showMessageDialog(rootPane, "el pago por $."+txttotal_pago.getText()+
+                        "del Sr " + txtcliente.getText()+"ha sido realizado con Exito");
+                
+                mostrar(idreserva);
                 inhabilitar();
-
+                
+                //Desocupar la Habitacion
+                fhabitacion func2 =new fhabitacion();
+                vhabitacion dts2 =new vhabitacion();
+                
+                dts2.setIdhabitacion(Integer.parseInt(txtidhabitacion.getText()));
+                func2.desocupar(dts2);
+                
+                //Cancelar o pagar la reserva
+                freserva func3 =new freserva();
+                vreserva dts3 =new vreserva();
+                
+                dts3.setIdreserva(Integer.parseInt(txtidreserva.getText()));
+                func3.pagar(dts3);
+               
             }
 
         }
-        else if (accion.equals("ediras")){
-            dts.setIdproducto(Integer.parseInt(txtidpago.getText()));
+        else if (accion.equals("editar")){
+            dts.setIdpago(Integer.parseInt(txtidpago.getText()));
 
             if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "el producto fue editado satisfatoriamente");
-                mostrar("");
+                JOptionPane.showMessageDialog(rootPane, "El pago del Sr. "+
+                        txtcliente.getText()+"Ha sido Modificado Correctamente");
+                mostrar(idreserva);
                 inhabilitar();
 
             }
@@ -683,30 +738,31 @@ public class frmpago extends javax.swing.JFrame {
         int fila=tablalistado.rowAtPoint(evt.getPoint());
 
         txtidpago.setText(tablalistado.getValueAt(fila, 0).toString());
-        txtidreserva.setText(tablalistado.getValueAt(fila, 1).toString());
+        //txtidreserva.setText(tablalistado.getValueAt(fila, 1).toString());
 
-        txtdescripcion.setText(tablalistado.getValueAt(fila, 2).toString());
-        cbotipo_comprobante.setSelectedItem(tablalistado.getValueAt(fila, 3).toString());
-        txtnum_comprobante.setText(tablalistado.getValueAt(fila, 4).toString());
-
+       
+        cbotipo_comprobante.setSelectedItem(tablalistado.getValueAt(fila, 2).toString());
+        txtnum_comprobante.setText(tablalistado.getValueAt(fila, 3).toString());
+        txtigv.setText(tablalistado.getValueAt(fila, 4).toString());
+        txttotal_pago.setText(tablalistado.getValueAt(fila, 5).toString());
+       
+        dcfecha_emision.setDate(Date.valueOf(tablalistado.getValueAt(fila, 6).toString()));
+        dcfecha_pago.setDate(Date.valueOf(tablalistado.getValueAt(fila, 7).toString()));
+        
+        
     }//GEN-LAST:event_tablalistadoMouseClicked
-
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        // TODO add your handling code here:
-        mostrar(txtbuscar.getText());
-    }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
         if (!txtidpago.getText().equals("")) {
-            int confirmacion=JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar el producto"," confirmar",2);
+            int confirmacion=JOptionPane.showConfirmDialog(rootPane,"Estas seguro de eliminar el pago seleccionado"," confirmar",2);
             if (confirmacion==0) {
-                fproducto func =new fproducto();
-                vproducto dts=new vproducto();
+                fpago func =new fpago();
+                vpago dts=new vpago();
 
-                dts.setIdproducto(Integer.parseInt(txtidpago.getText()));
+                dts.setIdpago(Integer.parseInt(txtidpago.getText()));
                 func.eliminar(dts);
-                mostrar("");
+                mostrar(idreserva);
                 inhabilitar();
             }
         }
@@ -777,7 +833,6 @@ public class frmpago extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
@@ -809,7 +864,6 @@ public class frmpago extends javax.swing.JFrame {
     private javax.swing.JLabel lbltotalregistros1;
     private javax.swing.JTable tablalistado;
     private javax.swing.JTable tablalistadoconsumo;
-    private javax.swing.JLabel txtbuscar;
     private javax.swing.JTextField txtcliente;
     private javax.swing.JTextField txthabitacion;
     private javax.swing.JTextField txtidhabitacion;

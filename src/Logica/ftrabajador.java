@@ -38,7 +38,7 @@ public class ftrabajador {
         modelo = new DefaultTableModel(null, titulos);
 
         sSQL = "select p.idpersona,p.nombre,p.apaterno,p.amaterno,p.tipo_documento,p.num_documento,"
-                + "p.direccion,p.telefono,p.email,t.sueldo,t.acceso,t.login,t.password,t.estado from perosona p inner join trabajador t "
+                + "p.direccion,p.telefono,p.email,t.sueldo,t.acceso,t.login,t.password,t.estado from persona p inner join trabajador t "
                 + "on p.idpersona=t.idpersona where num_documento like'%"
                 + buscar + "%'order by idpersona desc";
 
@@ -82,7 +82,7 @@ public class ftrabajador {
                 + "values(?,?,?,?,?,?,?,?)";
 
         sSQL2 = "insert into trabajador(idpersona,sueldo,acceso,login,pasword,estado)"
-                + "values(select idpersona from persona order by idpersona desc limit 1),?,?,?,?,?)";
+                + "values((select idpersona from persona order by idpersona desc limit 1)?,?,?,?,?,?)";
 
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
@@ -219,7 +219,7 @@ try {
         modelo = new DefaultTableModel(null, titulos);
 
         sSQL = "select p.idpersona,p.nombre,p.apaterno,p.amaterno,"
-                + "t.acceso,t.login,t.password,t.estado from perosona p inner join trabajador t "
+                + "t.acceso,t.login,t.password,t.estado from persona p inner join trabajador t "
                 + "on p.idpersona=t.idpersona where t.login='"
                 + login + "' and t.password='"+password+ "' and t.estado='A'";
 

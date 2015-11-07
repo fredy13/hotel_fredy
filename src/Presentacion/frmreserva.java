@@ -5,7 +5,9 @@
  */
 package Presentacion;
 
+import Datos.vhabitacion;
 import Datos.vreserva;
+import Logica.fhabitacion;
 import Logica.fproducto;
 import Logica.freserva;
 import java.sql.Date;
@@ -191,6 +193,7 @@ public class frmreserva extends javax.swing.JInternalFrame {
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
         btnverconsumo = new javax.swing.JButton();
+        btnrealisarpagos = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
 
@@ -506,6 +509,13 @@ public class frmreserva extends javax.swing.JInternalFrame {
             }
         });
 
+        btnrealisarpagos.setText("Realisar Pagos");
+        btnrealisarpagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrealisarpagosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -529,6 +539,8 @@ public class frmreserva extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(btnverconsumo)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnrealisarpagos, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbltotalregistros)
                         .addGap(91, 91, 91))))
@@ -547,7 +559,8 @@ public class frmreserva extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltotalregistros)
-                    .addComponent(btnverconsumo))
+                    .addComponent(btnverconsumo)
+                    .addComponent(btnrealisarpagos))
                 .addContainerGap())
         );
 
@@ -668,6 +681,13 @@ public class frmreserva extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(rootPane, "la fue reserva fue rejistrada satisfatoriamente");
                 mostrar("");
                 inhabilitar();
+                
+                //ocupamos la habitacion alquilada
+                fhabitacion func3=new fhabitacion();
+                vhabitacion dts3=new vhabitacion ();
+                
+                dts3.setIdhabitacion(Integer.parseInt(txtidhabitacion.getText()));
+                func3.ocupar(dts3);
 
             }
 
@@ -796,6 +816,25 @@ public class frmreserva extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnverconsumoActionPerformed
 
+    private void btnrealisarpagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrealisarpagosActionPerformed
+        // TODO add your handling code here:
+        int fila =tablalistado.getSelectedRow();
+       
+        frmpago.idreserva = tablalistado.getValueAt(fila, 0).toString();
+        frmpago.cliente = tablalistado.getValueAt(fila, 4).toString();
+        frmpago.totalreserva =Double.parseDouble( tablalistado.getValueAt(fila, 11).toString());
+
+         frmpago.idhabitacion = tablalistado.getValueAt(fila, 1).toString();
+         frmpago.habitacion = tablalistado.getValueAt(fila, 2).toString();
+         
+         
+         frmpago form=new frmpago();
+         frminicio.escritorio.add(form);
+         form.toFront();
+         form.setVisible(true);
+         
+    }//GEN-LAST:event_btnrealisarpagosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -839,6 +878,7 @@ public class frmreserva extends javax.swing.JInternalFrame {
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnrealisarpagos;
     private javax.swing.JButton btnsalir;
     private javax.swing.JButton btnverconsumo;
     private javax.swing.JComboBox cboestado;

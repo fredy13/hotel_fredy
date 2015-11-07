@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author usuario
  */
-public class frmtrabajador extends javax.swing.JInternalFrame {
+public class frmtrabajador extends javax.swing.JFrame {
 
     /**
      * Creates new form frmcliente
